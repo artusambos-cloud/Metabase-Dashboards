@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>900.care · Retail - Rétention & cohortes (exemple anonymisé)</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root{ --bg:#F9FBFC; --card:#FFFFFF; --border:#E3E8EE; --text:#4C5773; --title:#2E3A59; --pill:#F4F6F8; --pillBorder:#DCE1E8; --head:#F5F7FA; --brand:#509EE3; }
+  *{box-sizing:border-box;}
+  body{ margin:0; padding:24px; background:var(--bg); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; color:var(--text); }
+  .banner{ max-width:1180px; margin:0 auto 14px auto; padding:10px 16px; background:#FFF7E6; border:1px solid #F2CD7A; border-radius:8px; font-size:13px; color:#8A5B00; }
+  .topbar{ max-width:1180px; margin:0 auto 16px auto; display:flex; align-items:center; gap:10px;}
+  .topbar h1{ font-size:18px; color:var(--title); margin:0; font-weight:700;}
+  .topbar span{ font-size:13px; color:#8B93A7;}
+  .gaugerow{ max-width:1180px; margin:0 auto 18px auto; display:grid; grid-template-columns: repeat(4, 1fr); gap:18px; }
+  .stack{ max-width:1180px; margin:0 auto; display:flex; flex-direction:column; gap:18px; }
+  .card{ background:var(--card); border:1px solid var(--border); border-radius:10px; padding:16px 18px; box-shadow:0 1px 2px rgba(20,30,60,0.04); }
+  .card h3{ font-size:13px; color:var(--title); margin:0 0 6px 0; font-weight:600; display:flex; justify-content:space-between; align-items:center; }
+  .card h3 .dots{ color:#C6CCDA; font-weight:700; letter-spacing:1px;}
+  .gauge-wrap{ position:relative; height:120px; }
+  .gauge-value{ position:absolute; left:0; right:0; bottom:6px; text-align:center; font-size:22px; font-weight:700; color:var(--title); }
+  table{ width:100%; border-collapse:collapse; font-size:12.5px; }
+  thead th{ text-align:left; color:#5A6480; font-weight:600; background:var(--head); padding:8px 10px; border-bottom:1px solid var(--border); white-space:nowrap; }
+  tbody td{ padding:7px 10px; border-bottom:1px solid #F0F2F6; color:#4C5773; white-space:nowrap; }
+  tbody tr:hover{ background:#FAFBFD; }
+  .rowcount{ text-align:right; font-size:11.5px; color:#9AA2B4; padding-top:8px; }
+  .tablewrap{ overflow-x:auto; }
+  .footer-note{ max-width:1180px; margin:24px auto 0 auto; font-size:12px; color:#9AA2B4; text-align:center; }
+</style>
+</head>
+<body>
+
+<div class="banner">
+  Exemple anonymisé — tous les chiffres (taux de rétention, revenus, effectifs de cohortes) sont fictifs. Reconstruction visuelle d'un dashboard Metabase réel, à titre d'illustration.
+</div>
+
+<div class="topbar">
+  <h1>900.care · Retail - Rétention & cohortes</h1>
+  <span>Metabase (exemple)</span>
+</div>
+
+<div class="gaugerow">
+  <div class="card">
+    <h3>% de réassorts à 90 j - Retail <span class="dots">⋯</span></h3>
+    <div class="gauge-wrap"><canvas id="g1"></canvas><div class="gauge-value">47%</div></div>
+  </div>
+  <div class="card">
+    <h3>% de réassorts à 90 j - Retail 4 sem. <span class="dots">⋯</span></h3>
+    <div class="gauge-wrap"><canvas id="g2"></canvas><div class="gauge-value">49%</div></div>
+  </div>
+  <div class="card">
+    <h3>% de réassorts à 120 j - Retail <span class="dots">⋯</span></h3>
+    <div class="gauge-wrap"><canvas id="g3"></canvas><div class="gauge-value">58%</div></div>
+  </div>
+  <div class="card">
+    <h3>% de réassorts à 120 j - Retail 4 sem. <span class="dots">⋯</span></h3>
+    <div class="gauge-wrap"><canvas id="g4"></canvas><div class="gauge-value">60%</div></div>
+  </div>
+</div>
+
+<div class="stack">
+
+  <div class="card">
+    <h3>% de clients ayant recommandé une 2e fois <span class="dots">⋯</span></h3>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Cohorte</th><th>1res commandes</th><th>M1</th><th>M2</th><th>M3</th><th>M4</th><th>M5</th><th>M6</th></tr></thead>
+        <tbody>
+          <tr><td>10-2024</td><td>5</td><td>20%</td><td>40%</td><td>40%</td><td>60%</td><td>60%</td><td>80%</td></tr>
+          <tr><td>11-2024</td><td>2</td><td>50%</td><td>50%</td><td>50%</td><td>50%</td><td>50%</td><td>50%</td></tr>
+          <tr><td>12-2024</td><td>3</td><td>67%</td><td>67%</td><td>67%</td><td>67%</td><td>100%</td><td>100%</td></tr>
+          <tr><td>01-2025</td><td>11</td><td>18%</td><td>55%</td><td>73%</td><td>82%</td><td>82%</td><td>82%</td></tr>
+          <tr><td>02-2025</td><td>16</td><td>19%</td><td>44%</td><td>56%</td><td>63%</td><td>63%</td><td>69%</td></tr>
+          <tr><td>03-2025</td><td>21</td><td>14%</td><td>24%</td><td>43%</td><td>52%</td><td>57%</td><td>62%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="rowcount">22 lignes (exemple)</div>
+  </div>
+
+  <div class="card">
+    <h3>Rétention client (%) par 1re commande - regroupé par trimestre <span class="dots">⋯</span></h3>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Cohorte</th><th>1res commandes</th><th>T1 (M0-3)</th><th>T2 (M4-6)</th><th>T3 (M7-9)</th></tr></thead>
+        <tbody>
+          <tr><td>09-2025</td><td>44</td><td>62%</td><td>58%</td><td>41%</td></tr>
+          <tr><td>10-2025</td><td>78</td><td>45%</td><td>52%</td><td>32%</td></tr>
+          <tr><td>11-2025</td><td>47</td><td>41%</td><td>39%</td><td>22%</td></tr>
+          <tr><td>12-2025</td><td>12</td><td>38%</td><td>58%</td><td>0%</td></tr>
+          <tr><td>01-2026</td><td>25</td><td>52%</td><td>36%</td><td>0%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="rowcount">22 lignes (exemple)</div>
+  </div>
+
+  <div class="card">
+    <h3>Revenu cumulé par cohorte <span class="dots">⋯</span></h3>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Cohorte</th><th>Revenu 1re commande</th><th>M1</th><th>M2</th><th>M3</th><th>M4</th><th>M5</th><th>M6</th></tr></thead>
+        <tbody>
+          <tr><td>10-2024</td><td>3 890 €</td><td>6%</td><td>10%</td><td>18%</td><td>25%</td><td>8%</td><td>4%</td></tr>
+          <tr><td>11-2024</td><td>1 210 €</td><td>0%</td><td>3%</td><td>14%</td><td>0%</td><td>17%</td><td>0%</td></tr>
+          <tr><td>01-2025</td><td>7 640 €</td><td>8%</td><td>20%</td><td>8%</td><td>8%</td><td>14%</td><td>4%</td></tr>
+          <tr><td>02-2025</td><td>16 980 €</td><td>3%</td><td>8%</td><td>11%</td><td>9%</td><td>15%</td><td>9%</td></tr>
+          <tr><td>03-2025</td><td>17 340 €</td><td>6%</td><td>7%</td><td>16%</td><td>11%</td><td>14%</td><td>14%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="rowcount">22 lignes (exemple)</div>
+  </div>
+
+  <div class="card">
+    <h3>Rétention du revenu (%) par 1re commande - regroupé par mois <span class="dots">⋯</span></h3>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Cohorte</th><th>Revenu 1re commande</th><th>0-3 mois</th><th>4-6 mois</th><th>7-9 mois</th></tr></thead>
+        <tbody>
+          <tr><td>10-2024</td><td>4 980 €</td><td>25%</td><td>28%</td><td>33%</td></tr>
+          <tr><td>11-2024</td><td>2 050 €</td><td>15%</td><td>10%</td><td>27%</td></tr>
+          <tr><td>01-2025</td><td>10 720 €</td><td>24%</td><td>18%</td><td>30%</td></tr>
+          <tr><td>02-2025</td><td>21 460 €</td><td>17%</td><td>26%</td><td>21%</td></tr>
+          <tr><td>03-2025</td><td>26 190 €</td><td>18%</td><td>25%</td><td>31%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="rowcount">22 lignes (exemple)</div>
+  </div>
+
+  <div class="card">
+    <h3>Taux de réassort à 120 j par cohorte <span class="dots">⋯</span></h3>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Cohorte</th><th>1res commandes</th><th>Réassorts 0-120j</th></tr></thead>
+        <tbody>
+          <tr><td>10-2024</td><td>5</td><td>2</td></tr>
+          <tr><td>11-2024</td><td>2</td><td>2</td></tr>
+          <tr><td>12-2024</td><td>3</td><td>3</td></tr>
+          <tr><td>01-2025</td><td>11</td><td>10</td></tr>
+          <tr><td>02-2025</td><td>16</td><td>11</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="rowcount">18 lignes (exemple)</div>
+  </div>
+
+</div>
+
+<div class="footer-note">Données fictives générées à des fins d'illustration — 900.care, dashboard analytics retail (exemple).</div>
+
+<script>
+// Jauges façon Metabase : arc rouge / jaune / vert en semi-cercle
+function gauge(id, value){
+  new Chart(document.getElementById(id), {
+    type:'doughnut',
+    data:{ datasets:[{
+      data:[40,30,30],
+      backgroundColor:["#E35B5B","#F9D45C","#88BF4D"],
+      borderWidth:0
+    }]},
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      circumference:180, rotation:-90, cutout:'72%',
+      plugins:{ legend:{display:false}, tooltip:{enabled:false} }
+    }
+  });
+}
+gauge('g1',47); gauge('g2',49); gauge('g3',58); gauge('g4',60);
+</script>
+</body>
+</html>
