@@ -3,7 +3,9 @@
 🛠️ Solution : Dashboard dynamique intégrant les règles d'incentives et les différents angles business en retail. 
 📊 Usage : +15 filtres interactifs pour une analyse sur-mesure par le Directeur Commercial.
 
+# Comment ouvrir les dossiers .HTML
 
+--> 
 
 # Metabase Dashboards — 900.care Retail Analytics (exemples anonymisés)
 
