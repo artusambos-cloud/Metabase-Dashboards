@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>900.care · Modèle de données - Visites & Commissions Agences (exemple anonymisé)</title>
+<style>
+  :root{ --bg:#F9FBFC; --card:#FFFFFF; --border:#E3E8EE; --text:#4C5773; --title:#2E3A59; --pill:#F4F6F8; --pillBorder:#DCE1E8; --head:#EEF2FC; --brand:#509EE3; }
+  *{box-sizing:border-box;}
+  body{ margin:0; padding:24px; background:var(--bg); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; color:var(--text); }
+  .banner{ max-width:1180px; margin:0 auto 14px auto; padding:10px 16px; background:#FFF7E6; border:1px solid #F2CD7A; border-radius:8px; font-size:13px; color:#8A5B00; }
+  .topbar{ max-width:1180px; margin:0 auto 6px auto; display:flex; align-items:center; gap:8px; color:#8B93A7; font-size:13px;}
+  .topbar b{ color:var(--title); }
+  .subtitle{ max-width:1180px; margin:0 auto 18px auto; font-size:12px; color:#9AA2B4; }
+  .card{ max-width:1180px; margin:0 auto; background:var(--card); border:1px solid var(--border); border-radius:10px; padding:16px 18px; box-shadow:0 1px 2px rgba(20,30,60,0.04); }
+  .card h3{ font-size:14px; color:var(--title); margin:0 0 10px 0; font-weight:600; }
+  table{ width:100%; border-collapse:collapse; font-size:12px; }
+  thead th{ text-align:left; color:#3A5DAE; font-weight:700; background:var(--head); padding:8px 10px; border-bottom:1px solid var(--border); white-space:nowrap; }
+  tbody td{ padding:7px 10px; border-bottom:1px solid #F0F2F6; color:#4C5773; white-space:nowrap; }
+  tbody tr:hover{ background:#FAFBFD; }
+  .bool-true{ color:#2E7D46; font-weight:600; }
+  .bool-false{ color:#B0522A; font-weight:600; }
+  .rowcount{ text-align:right; font-size:11.5px; color:#9AA2B4; padding-top:8px; }
+  .tablewrap{ overflow-x:auto; }
+  .colcount{ font-size:11.5px; color:#9AA2B4; padding-bottom:8px; }
+  .footer-note{ max-width:1180px; margin:24px auto 0 auto; font-size:12px; color:#9AA2B4; text-align:center; }
+  .sql-card{ max-width:1180px; margin:18px auto 0 auto; background:#1E2430; border:1px solid #2E3646; border-radius:10px; padding:16px 18px; box-shadow:0 1px 2px rgba(20,30,60,0.04); }
+  .sql-card h3{ font-size:14px; color:#E7EBF3; margin:0 0 10px 0; font-weight:600; }
+  .sql-card pre{ margin:0; overflow-x:auto; }
+  .sql-card code{ color:#D7DEEC; font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace; font-size:12px; line-height:1.55; white-space:pre; }
+</style>
+</head>
+<body>
+
+<div class="banner">
+  Exemple anonymisé — toutes les données (identifiants, adresses, coordonnées GPS, noms d'agents/agences, montants) sont fictives. Reconstruction visuelle d'un modèle de données Metabase réel (jointure visites × magasins × agences × commissions), à titre d'illustration.
+</div>
+
+<div class="topbar">📦 Our analytics / <b>Modèle de données - Visites & Commissions Agences</b></div>
+<div class="subtitle">900.care · Metabase (exemple) — table issue d'une jointure entre visites terrain, magasins, agences et commandes</div>
+
+<div class="card">
+  <h3>Résultat de la requête (aperçu) <span style="float:right;color:#C6CCDA;font-weight:700;">⋯</span></h3>
+  <div class="colcount">28 colonnes</div>
+  <div class="tablewrap">
+    <table>
+      <thead>
+        <tr>
+          <th>creation_date_visite</th><th>Visit_ID</th><th>ID_Customer</th><th>Store</th><th>Sales_Team</th>
+          <th>Groupe</th><th>Enseigne</th><th>Centrale</th><th>Retail Customer Type</th><th>Agent Commercial ID</th>
+          <th>Adresse</th><th>Zip_Code</th><th>Department_Code</th><th>Name</th><th>Customer Account Code</th>
+          <th>Store_Format</th><th>Compliance_Score_Percent</th><th>Agence_Visite</th><th>Agent_Visite</th><th>CA_Total_Commande</th>
+          <th>products_implanted</th><th>products_at_eye_level</th><th>shelf_talkers_installed</th><th>box_installed</th>
+          <th>doubled_facings</th><th>discussion_with_store_people</th><th>Latitude</th><th>Longitude</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>7/7/2026, 14:12</td><td>6104</td><td>512340</td><td>CARREFOUR Vallenoue - VALDIS</td><td>GMS</td>
+          <td>Carrefour</td><td>Carrefour HM</td><td></td><td>Store</td><td>731045</td>
+          <td>18 rue des Peupliers</td><td>44450</td><td>44</td><td>CARREFOUR Vallenoue - VALDIS</td><td>RCHMVA10254</td>
+          <td>Hyper</td><td>38%</td><td>Agence Trium</td><td>Thibault Renard</td><td>0</td>
+          <td class="bool-true">true</td><td class="bool-false">false</td><td class="bool-true">true</td><td class="bool-false">false</td>
+          <td class="bool-false">false</td><td class="bool-true">true</td><td>47.158420° N</td><td>1.624310° W</td>
+        </tr>
+        <tr>
+          <td>7/7/2026, 08:05</td><td>6097</td><td>548812</td><td>INTERMARCHE SUPER Ferrières - FERMARK</td><td>GMS</td>
+          <td>Intermarché</td><td>Intermarché SM</td><td>Intermarché - Ouest</td><td>Store</td><td>748812</td>
+          <td>4 allée du Verger</td><td>49610</td><td>49</td><td>INTERMARCHE SUPER Ferrières - FERMARK</td><td>RISMFE40662</td>
+          <td>Super</td><td>55%</td><td>Agence Nordis</td><td>Léa Mercier</td><td>0</td>
+          <td class="bool-true">true</td><td class="bool-true">true</td><td class="bool-false">false</td><td class="bool-false">false</td>
+          <td class="bool-true">true</td><td class="bool-false">false</td><td>47.301220° N</td><td>0.712450° W</td>
+        </tr>
+        <tr>
+          <td>7/7/2026, 06:18</td><td>6091</td><td>399215</td><td>E.Leclerc Vionne Sud - VIODIS</td><td>GMS</td>
+          <td>E. Leclerc</td><td>E. Leclerc</td><td>E. Leclerc - Scaouest</td><td>Store</td><td>799215</td>
+          <td>27 chemin des Vignes</td><td>49690</td><td>49</td><td>E.Leclerc Vionne Sud - VIODIS</td><td>RLECVI00031</td>
+          <td>Hyper</td><td>91%</td><td>Agence Distri Ouest</td><td>Alexandre Prévost</td><td>0</td>
+          <td class="bool-true">true</td><td class="bool-true">true</td><td class="bool-true">true</td><td class="bool-true">true</td>
+          <td class="bool-false">false</td><td class="bool-true">true</td><td>47.245780° N</td><td>0.655190° W</td>
+        </tr>
+        <tr>
+          <td>7/7/2026, 14:36</td><td>6105</td><td>551034</td><td>INTERMARCHE SUPER Aiguemont - AIGDIS</td><td>GMS</td>
+          <td>Intermarché</td><td>Intermarché SM</td><td>Intermarché - Sud-Est</td><td>Store</td><td>751034</td>
+          <td>9 rue de la Prairie</td><td>30800</td><td>30</td><td>INTERMARCHE SUPER Aiguemont - AIGDIS</td><td>RISMAI12566</td>
+          <td>Super</td><td>27%</td><td>Agence Armor</td><td>Antoine Roussel</td><td>0</td>
+          <td class="bool-false">false</td><td class="bool-false">false</td><td class="bool-true">true</td><td class="bool-false">false</td>
+          <td class="bool-false">false</td><td class="bool-false">false</td><td>43.812640° N</td><td>4.245880° E</td>
+        </tr>
+        <tr>
+          <td>7/7/2026, 08:49</td><td>6100</td><td>548601</td><td>INTERMARCHE HYPER Salvinac</td><td>GMS</td>
+          <td>Intermarché</td><td>Intermarché HM</td><td></td><td>Store</td><td>748601</td>
+          <td>3 route de la Chapelle</td><td>71960</td><td>71</td><td>INTERMARCHE HYPER Salvinac</td><td>RIHMSA40085</td>
+          <td>Hyper</td><td>62%</td><td>Agence Trium</td><td>Thibault Renard</td><td>0</td>
+          <td class="bool-true">true</td><td class="bool-false">false</td><td class="bool-true">true</td><td class="bool-true">true</td>
+          <td class="bool-false">false</td><td class="bool-true">true</td><td>46.512330° N</td><td>4.712060° E</td>
+        </tr>
+        <tr>
+          <td>7/7/2026, 08:48</td><td>6099</td><td>548455</td><td>INTERMARCHE SUPER Romanoux Thorins - ROMDIS</td><td>GMS</td>
+          <td>Intermarché</td><td>Intermarché SM</td><td>Intermarché - Centre-Est</td><td>Store</td><td>748455</td>
+          <td>15 boulevard des Écoles</td><td>71390</td><td>71</td><td>INTERMARCHE SUPER Romanoux Thorins - ROMDIS</td><td>RISMRO12894</td>
+          <td>Super</td><td>50%</td><td>Agence Armor</td><td>Antoine Roussel</td><td>0</td>
+          <td class="bool-true">true</td><td class="bool-true">true</td><td class="bool-false">false</td><td class="bool-false">false</td>
+          <td class="bool-false">false</td><td class="bool-false">false</td><td>46.487910° N</td><td>4.789230° E</td>
+        </tr>
+        <tr>
+          <td>7/7/2026, 08:47</td><td>6096</td><td>549712</td><td>CARREFOUR MARKET Fontbrune</td><td>GMS</td>
+          <td>Carrefour</td><td>Carrefour Market SM</td><td></td><td>Store</td><td>749712</td>
+          <td>6 rue du Moulin Neuf</td><td>82120</td><td>82</td><td>CARREFOUR MARKET Fontbrune</td><td>RCSMFO42624</td>
+          <td>Super</td><td>67%</td><td>Agence Kernel</td><td>Julien Vasseur</td><td>0</td>
+          <td class="bool-true">true</td><td class="bool-true">true</td><td class="bool-true">true</td><td class="bool-false">false</td>
+          <td class="bool-true">true</td><td class="bool-true">true</td><td>44.021150° N</td><td>1.312740° E</td>
+        </tr>
+        <tr>
+          <td>4/7/2026, 07:38</td><td>6082</td><td>318907</td><td>Auchan Blanquefontaine - SARL SABLIER DISTRIBUTION</td><td>GMS</td>
+          <td>Auchan</td><td>Auchan HM</td><td></td><td>Store</td><td>718907</td>
+          <td>22 avenue du Stade</td><td>33610</td><td>33</td><td>Auchan Blanquefontaine - SARL SABLIER DISTRIBUTION</td><td>RAHMBL00471</td>
+          <td>Autre</td><td>50%</td><td>Agence Bréhat</td><td>Marion Delattre</td><td>0</td>
+          <td class="bool-true">true</td><td class="bool-false">false</td><td class="bool-false">false</td><td class="bool-true">true</td>
+          <td class="bool-true">true</td><td class="bool-false">false</td><td>44.812060° N</td><td>0.712380° W</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="rowcount">affichage des 2000 premières lignes (exemple) — table complète : ~3 400 lignes</div>
+</div>
+
+<div class="sql-card">
+  <h3>Requête SQL (BigQuery Standard SQL) — anonymisée</h3>
+  <pre><code>WITH order_aggregation AS (
+  /* On somme TOUT le CA par client et par jour, peu importe le nombre de commandes */
+  SELECT
+    sol.`Customer` AS customer_id,
+    DATE(sol.`Creation Date`) AS order_date,
+    SUM(sol.`Total HT`) AS total_ca_du_jour
+  FROM `landing_erp.sales_order_lines_retail` AS sol
+  GROUP BY 1, 2
+)
+SELECT
+  /* --- 1. TEMPS ET IDs --- */
+  v.`date` AS `creation_date_visite`,
+  v.`id` AS `Visit_ID`,
+  cr.`ID Contact` AS `ID_Customer`,
+  /* --- 2. INFOS MAGASIN --- */
+  cr.`Name` AS `Store`,
+  cr.`Sales Teams` AS `Sales_Team`,
+  cr.`Groupe` AS `Groupe`,
+  cr.`Enseigne` AS `Enseigne`,
+  cr.`Centrale Regionale` AS `Centrale`,
+  cr.`Retail Customer Type` AS `Retail Customer Type`,
+  cr.`Agent Commercial ID` AS `Agent Commercial ID`,
+  cr.`Adresse` AS `Adresse`,
+  /* --- 7. GEO &amp; LOCALISATION ROBUSTE --- */
+  REGEXP_EXTRACT(cr.`Adresse`, r'\b(\d{5})\b') AS Zip_Code,
+  REGEXP_EXTRACT(cr.`Adresse`, r'\b(\d{2})\d{3}\b') AS Department_Code,
+  cr.`Name` AS `Name`,
+  cr.`Customer Account Code` AS `Customer Account Code`,
+
+  CASE
+    WHEN LOWER(cr.`Enseigne`) IN ('carrefour hm', 'e. leclerc', 'intermarché hm', 'u hyper', 'carrefour plateforme') THEN 'Hyper'
+    WHEN LOWER(cr.`Enseigne`) IN ('carrefour market sm', 'u super', 'intermarché sm', 'auchan sm') THEN 'Super'
+    WHEN LOWER(cr.`Enseigne`) IN ('intermarché express', 'intermarché autre', 'carrefour city', 'carrefour contact', 'u express', 'carrefour express', 'casino proximité', 'franprix') THEN 'Proxi'
+    ELSE 'Autre'
+  END AS `Store_Format`,
+
+  /* --- 6. SCORES --- */
+  ROUND(
+    (
+      (CASE WHEN vc.products_implanted THEN 1 ELSE 0 END) +
+      (CASE WHEN vc.products_at_eye_level THEN 1 ELSE 0 END) +
+      (CASE WHEN vc.shelf_talkers_installed THEN 1 ELSE 0 END) +
+      (CASE WHEN vc.box_installed THEN 1 ELSE 0 END) +
+      (CASE WHEN vc.doubled_facings THEN 1 ELSE 0 END) +
+      (CASE WHEN vc.discussion_with_store_people THEN 1 ELSE 0 END)
+    ) / 6, 2
+  ) AS `Compliance_Score_Percent`,
+  /* --- 3. INFOS AGENT --- */
+  TRIM(SPLIT(v.`agentco_name`, ',')[SAFE_OFFSET(0)]) AS `Agence_Visite`,
+  TRIM(SPLIT(v.`agentco_name`, ',')[SAFE_OFFSET(1)]) AS `Agent_Visite`,
+  /* --- 4. MÉTRIQUE CA --- */
+  COALESCE(oa.total_ca_du_jour, 0) AS `CA_Total_Commande`,
+
+  /* --- 5. CHECKLISTS (Pour tes autres graphs) --- */
+  /* --- Transformation des NULL en FALSE --- */
+  COALESCE(vc.products_implanted, FALSE) AS products_implanted,
+  COALESCE(vc.products_at_eye_level, FALSE) AS products_at_eye_level,
+  COALESCE(vc.shelf_talkers_installed, FALSE) AS shelf_talkers_installed,
+  COALESCE(vc.box_installed, FALSE) AS box_installed,
+  COALESCE(vc.doubled_facings, FALSE) AS doubled_facings,
+  COALESCE(vc.discussion_with_store_people, FALSE) AS discussion_with_store_people,
+  /* --- 6. GEO --- */
+  ROUND(CAST(cr.Latitude AS FLOAT64), 7) AS Latitude,
+  ROUND(CAST(cr.Longitude AS FLOAT64), 7) AS Longitude
+FROM `landing_erp.visits` AS v
+LEFT JOIN `landing_erp.contact_retail` AS cr
+  ON CAST(v.`store_contact_id` AS STRING) = CAST(cr.`ID Contact` AS STRING)
+LEFT JOIN `landing_erp.visit_checklists` AS vc
+  ON CAST(v.`id` AS STRING) = CAST(vc.`visit_id` AS STRING)
+LEFT JOIN order_aggregation AS oa
+  ON CAST(v.`store_contact_id` AS STRING) = CAST(oa.customer_id AS STRING)
+  AND DATE(v.`date`) = oa.order_date</code></pre>
+</div>
+
+<div class="footer-note">Données fictives générées à des fins d'illustration — 900.care, modèle de données retail (exemple). Identifiants, adresses, coordonnées GPS, noms de magasins, d'agents et d'agences entièrement inventés ; enseignes et centrales réelles conservées (voir PLAN_ANONYMISATION.md).</div>
+
+</body>
+</html>
