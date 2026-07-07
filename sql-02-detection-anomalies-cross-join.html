@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>900.care · Repérer les magasins qui vendent anormalement peu (SQL)</title>
+<style>
+  :root{ --bg:#F9FBFC; --card:#FFFFFF; --border:#E3E8EE; --text:#4C5773; --title:#2E3A59; --brand:#509EE3; }
+  *{box-sizing:border-box;}
+  body{ margin:0; padding:24px; background:var(--bg); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; color:var(--text); }
+  .wrap{ max-width:1180px; margin:0 auto; }
+  .back{ font-size:12.5px; color:var(--brand); text-decoration:none; display:inline-block; margin-bottom:14px; }
+  .banner{ padding:10px 16px; background:#FFF7E6; border:1px solid #F2CD7A; border-radius:8px; font-size:13px; color:#8A5B00; margin-bottom:18px; }
+  h1{ font-size:19px; color:var(--title); margin:0 0 4px 0; }
+  .subtitle{ font-size:12.5px; color:#9AA2B4; margin:0 0 22px 0; max-width:760px; line-height:1.6; }
+  .steps-row{ display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:14px; margin-bottom:22px; }
+  .step-card{ background:var(--card); border:1px solid var(--border); border-radius:10px; padding:14px 16px; box-shadow:0 1px 2px rgba(20,30,60,0.04); }
+  .step-card .num{ display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px; border-radius:50%; background:var(--brand); color:#fff; font-size:12px; font-weight:700; margin-bottom:8px; }
+  .step-card h4{ margin:0 0 6px 0; font-size:13px; color:var(--title); }
+  .step-card p{ margin:0; font-size:12px; line-height:1.5; color:#8B93A7; }
+  .sql-card{ background:#1E2430; border:1px solid #2E3646; border-radius:10px; padding:16px 18px; box-shadow:0 1px 2px rgba(20,30,60,0.04); }
+  .sql-card h3{ font-size:13px; color:#E7EBF3; margin:0 0 10px 0; font-weight:600; display:flex; justify-content:space-between; align-items:center; }
+  .sql-card h3 a{ color:#8AA8D6; font-size:11.5px; font-weight:500; text-decoration:none; }
+  .sql-card pre{ margin:0; overflow-x:auto; }
+  .sql-card code{ color:#D7DEEC; font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace; font-size:12px; line-height:1.6; white-space:pre; }
+  .footer-note{ margin:24px auto 0 auto; font-size:12px; color:#9AA2B4; text-align:center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="./index.html">← Retour au portfolio</a>
+  <div class="banner">Exemple anonymisé — schéma et noms de tables génériques, aucune donnée réelle. Requête représentative du travail de modélisation de données (BigQuery Standard SQL).</div>
+
+  <h1>Repérer les magasins qui vendent anormalement peu</h1>
+  <p class="subtitle">Compare la performance de chaque magasin à la moyenne de tous les magasins, pour repérer instantanément ceux qui décrochent significativement, via un produit croisé (CROSS JOIN).</p>
+
+  <div class="steps-row">
+    <div class="step-card">
+      <div class="num">1</div>
+      <h4>CA moyen par magasin</h4>
+      <p>On calcule le chiffre d'affaires moyen de chaque magasin, groupé par groupe et par enseigne.</p>
+    </div>
+    <div class="step-card">
+      <div class="num">2</div>
+      <h4>Moyenne du marché</h4>
+      <p>On calcule ensuite la moyenne globale, tous magasins confondus.</p>
+    </div>
+    <div class="step-card">
+      <div class="num">3</div>
+      <h4>Comparaison en une passe</h4>
+      <p>Un CROSS JOIN permet de comparer chaque magasin à cette moyenne globale en une seule fois.</p>
+    </div>
+    <div class="step-card">
+      <div class="num">4</div>
+      <h4>Seuil d'alerte</h4>
+      <p>On ne garde que les magasins qui vendent moins de 50 % de la moyenne du marché.</p>
+    </div>
+  </div>
+
+  <div class="sql-card">
+    <h3>Requête SQL <a href="./sql-02-detection-anomalies-cross-join.sql">Voir le fichier .sql brut →</a></h3>
+    <pre><code>-- ============================================================================
+-- 900.care · Détection d'anomalies structurelles (CROSS JOIN)
+-- ============================================================================
+-- Cartographie la santé financière d'un réseau de distribution en confrontant
+-- instantanément la performance historique de chaque magasin à une constante
+-- de marché calculée dynamiquement, via un produit croisé (CROSS JOIN).
+-- ============================================================================
+
+/* ①  CA moyen par magasin */
+WITH store_performance AS (
+  SELECT
+    sales.store_name AS store_name,
+    sales.retail_group AS retail_group,
+    sales.banner_name AS banner_name,
+    ROUND(AVG(sales.amount_ht), 2) AS avg_revenue_store
+  FROM `analytics_warehouse.fct_sell_out` AS sales
+  WHERE COALESCE(sales.is_test_row, FALSE) = FALSE
+  GROUP BY 1, 2, 3
+),
+/* ②  Moyenne globale de marché, calculée à partir du résultat précédent */
+global_market_average AS (
+  SELECT
+    AVG(avg_revenue_store) AS global_avg_revenue
+  FROM store_performance
+)
+SELECT
+  store.store_name,
+  store.retail_group,
+  store.banner_name,
+  store.avg_revenue_store AS store_average_revenue,
+  ROUND(market.global_avg_revenue / 2, 2) AS critical_alert_threshold
+FROM store_performance AS store
+/* ③  On compare chaque magasin à la moyenne globale en une seule passe */
+CROSS JOIN global_market_average AS market
+/* ④  Seuil d'alerte : magasins sous 50 % de la moyenne, CA positif */
+WHERE store.avg_revenue_store < (market.global_avg_revenue / 2)
+  AND store.avg_revenue_store > 0
+ORDER BY store.avg_revenue_store ASC;</code></pre>
+  </div>
+
+  <div class="footer-note">Données et schémas fictifs — 900.care, exemple de modélisation de données retail.</div>
+</div>
+</body>
+</html>
