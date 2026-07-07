@@ -77,7 +77,7 @@ Calcule un CA net fiable en réconciliant factures et avoirs à la ligne.
 
 ## À propos des données
 
-Tous les chiffres (CA, volumes, taux, montants, dates précises) sont générés artificiellement. Les noms d'agents commerciaux, d'agences partenaires et de magasins individuels sont fictifs. Les enseignes de la grande distribution française (E.Leclerc, Carrefour, Intermarché, Coopérative U, Casino, Auchan) sont conservées telles quelles car ce sont des informations publiques ; seule la répartition précise du CA par enseigne a été inventée. Voir [`PLAN_ANONYMISATION.md`](./PLAN_ANONYMISATION.md) pour le détail complet, catégorie par catégorie.
+Tous les chiffres (CA, volumes, taux, montants, dates précises) sont générés artificiellement. Les noms d'agents commerciaux, d'agences partenaires et de magasins individuels sont fictifs. 
 
 ## Stack
 
