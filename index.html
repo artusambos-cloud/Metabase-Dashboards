@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Retail Analytics — Portfolio de dashboards Metabase</title>
+<style>
+  :root{ --bg:#F9FBFC; --card:#FFFFFF; --border:#E3E8EE; --text:#4C5773; --title:#2E3A59; --brand:#509EE3; }
+  *{box-sizing:border-box;}
+  body{ margin:0; padding:40px 24px; background:var(--bg); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; color:var(--text); }
+  .wrap{ max-width:920px; margin:0 auto; }
+  h1{ font-size:26px; color:var(--title); margin:0 0 6px 0; }
+  .sub{ font-size:14px; color:#8B93A7; margin:0 0 8px 0; }
+  .banner{ margin:18px 0 28px 0; padding:12px 16px; background:#FFF7E6; border:1px solid #F2CD7A; border-radius:8px; font-size:13px; color:#8A5B00; }
+  .pitch{ margin:0 0 28px 0; padding:18px 20px; background:var(--card); border:1px solid var(--border); border-radius:10px; box-shadow:0 1px 2px rgba(20,30,60,0.04); }
+  .pitch p{ margin:0 0 10px 0; font-size:13.5px; line-height:1.6; }
+  .pitch p:last-child{ margin-bottom:0; }
+  .pitch b{ color:var(--title); }
+  .lead{ font-size:14px; line-height:1.7; margin:0 0 8px 0; }
+  h2{ font-size:15px; color:var(--title); margin:32px 0 12px 0; text-transform:uppercase; letter-spacing:0.04em; }
+  .grid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap:16px; }
+  a.card{ display:block; background:var(--card); border:1px solid var(--border); border-radius:10px; padding:18px 20px; text-decoration:none; color:inherit; box-shadow:0 1px 2px rgba(20,30,60,0.04); transition:border-color .15s, transform .15s; }
+  a.card:hover{ border-color:var(--brand); transform:translateY(-2px); }
+  a.card .name{ font-size:15px; font-weight:600; color:var(--title); margin-bottom:6px; }
+  a.card .desc{ font-size:12.5px; color:#8B93A7; line-height:1.5; }
+  a.card .arrow{ color:var(--brand); font-size:12px; margin-top:10px; display:block; }
+  a.card.sql .name{ font-size:15px; font-weight:600; }
+  a.card.sql .file{ font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:11px; color:#B7BECE; margin:2px 0 8px 0; }
+  a.card.sql .steps{ margin:6px 0 0 0; padding-left:16px; font-size:12px; color:#8B93A7; line-height:1.6; }
+  a.card.sql .steps li{ margin-bottom:2px; }
+  .about{ background:var(--card); border:1px solid var(--border); border-radius:10px; padding:18px 20px; box-shadow:0 1px 2px rgba(20,30,60,0.04); }
+  .about p{ font-size:13px; line-height:1.7; margin:0 0 10px 0; }
+  .about p:last-child{ margin-bottom:0; }
+  .stack-line{ font-size:13px; line-height:1.7; }
+  .stack-line a{ color:var(--brand); }
+  footer{ margin-top:40px; font-size:12px; color:#9AA2B4; text-align:center; }
+  footer a{ color:var(--brand); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Retail Analytics</h1>
+  <p class="sub">Portfolio de dashboards Metabase — reconstructions anonymisées</p>
+
+  <div class="pitch">
+    <p>🎯 <b>Enjeu</b> : Piloter la force de vente et fiabiliser le calcul des commissions des agents terrain.</p>
+    <p>🛠️ <b>Solution</b> : Dashboard dynamique intégrant les règles d'incentives et les différents angles business en retail.</p>
+    <p>📊 <b>Usage</b> : +15 filtres interactifs pour une analyse sur-mesure par le Directeur Commercial.</p>
+  </div>
+
+  <div class="banner">
+    Exemple anonymisé — toutes les données affichées sur ces pages (chiffres, noms, adresses, coordonnées) sont fictives.
+  </div>
+
+  <p class="lead">Ce portfolio présente une sélection de dashboards Metabase construits pour le suivi retail d'une entreprise du secteur (ventes, commandes, visites terrain, commissions agences, rétention client), ainsi que le modèle de données et les requêtes SQL de modélisation associés. Il s'agit de <b>reconstructions visuelles</b> des vrais dashboards : mêmes types de graphiques, même structure, mais avec des données entièrement fictives — pensées pour être partagées publiquement sans exposer de chiffres d'affaires, de partenaires ou de collaborateurs réels.</p>
+
+  <h2>Dashboards</h2>
+  <p style="font-size:12.5px;color:#8B93A7;margin:-4px 0 14px 0;">Extrait non exhaustif — sélection représentative des dashboards Metabase réalisés.</p>
+  <div class="grid">
+    <a class="card" href="./dashboard-ca-volume.html">
+      <div class="name">CA & Volume</div>
+      <div class="desc">CA et volumes facturés, kit vs recharge, par catégorie, centrale régionale, groupe, agent et agence.</div>
+      <span class="arrow">Voir le dashboard →</span>
+    </a>
+    <a class="card" href="./dashboard-commandes.html">
+      <div class="name">Commandes</div>
+      <div class="desc">Nombre de commandes, panier moyen, SKU par commande, fréquence et rétention magasins.</div>
+      <span class="arrow">Voir le dashboard →</span>
+    </a>
+    <a class="card" href="./dashboard-visites-terrain.html">
+      <div class="name">Visites terrain</div>
+      <div class="desc">Visites, taux de couverture, mises en avant, réglettes, double facing.</div>
+      <span class="arrow">Voir le dashboard →</span>
+    </a>
+    <a class="card" href="./dashboard-commande-via-agence.html">
+      <div class="name">Retail - Commande via Agence</div>
+      <div class="desc">Listes de magasins, incentives, classement agences/agents, commissions calculées.</div>
+      <span class="arrow">Voir le dashboard →</span>
+    </a>
+    <a class="card" href="./dashboard-croissance-magasins.html">
+      <div class="name">Croissance magasins</div>
+      <div class="desc">Évolution du nombre de magasins actifs par groupe et par format, ARR par format.</div>
+      <span class="arrow">Voir le dashboard →</span>
+    </a>
+    <a class="card" href="./dashboard-magasins-inactifs.html">
+      <div class="name">Magasins inactifs</div>
+      <div class="desc">Magasins sans recommande depuis plus de 60 jours : ID, magasin, agence, agent, enseigne, format, dates et jours d'inactivité.</div>
+      <span class="arrow">Voir le dashboard →</span>
+    </a>
+    <a class="card" href="./dashboard-retention-cohortes.html">
+      <div class="name">Rétention & cohortes</div>
+      <div class="desc">Taux de réassort à 90/120 jours, rétention client et rétention du revenu par cohorte.</div>
+      <span class="arrow">Voir le dashboard →</span>
+    </a>
+  </div>
+
+  <h2>Modèle de données</h2>
+  <div class="grid">
+    <a class="card" href="./modele-donnees-visites-agences.html">
+      <div class="name">Modèle : Visites & Commissions Agences</div>
+      <div class="desc">Aperçu de la table jointe (visites × magasins × agences × commandes) avec la requête SQL intégrée.</div>
+      <span class="arrow">Voir le modèle →</span>
+    </a>
+  </div>
+
+  <h2>Requêtes SQL</h2>
+  <div class="grid">
+    <a class="card sql" href="./sql-01-deduplication-row-number.html">
+      <div class="name">Garder seulement la dernière visite de chaque magasin</div>
+      <div class="file">sql-01-deduplication-row-number.sql</div>
+      <div class="desc">Le flux de données terrain contient des doublons (un même magasin peut apparaître plusieurs fois). Cette requête ne garde que la ligne la plus récente pour chaque magasin.</div>
+      <ul class="steps">
+        <li>On numérote les visites de chaque magasin, de la plus récente (1) à la plus ancienne</li>
+        <li>On retire les visites marquées comme supprimées</li>
+        <li>On ne garde que la visite numéro 1, la plus récente</li>
+        <li>On trie le résultat de la plus récente à la plus ancienne</li>
+      </ul>
+      <span class="arrow">Voir la requête expliquée →</span>
+    </a>
+    <a class="card sql" href="./sql-02-detection-anomalies-cross-join.html">
+      <div class="name">Repérer les magasins qui vendent anormalement peu</div>
+      <div class="file">sql-02-detection-anomalies-cross-join.sql</div>
+      <div class="desc">Compare les ventes de chaque magasin à la moyenne de tous les magasins, pour repérer ceux qui décrochent.</div>
+      <ul class="steps">
+        <li>On calcule le chiffre d'affaires moyen de chaque magasin</li>
+        <li>On calcule la moyenne globale, tous magasins confondus</li>
+        <li>On compare chaque magasin à cette moyenne globale</li>
+        <li>On garde seulement ceux qui vendent moins de la moitié de la moyenne (= alerte)</li>
+      </ul>
+      <span class="arrow">Voir la requête expliquée →</span>
+    </a>
+    <a class="card sql" href="./sql-03-seuils-glissants-date-trunc.html">
+      <div class="name">Suivre les magasins qui décrochent mois après mois</div>
+      <div class="file">sql-03-seuils-glissants-date-trunc.sql</div>
+      <div class="desc">Même idée que la requête précédente, mais mois par mois, pour suivre une évolution dans le temps plutôt qu'une photo unique.</div>
+      <ul class="steps">
+        <li>On regroupe les ventes par magasin et par mois</li>
+        <li>On calcule la moyenne du marché pour chaque mois</li>
+        <li>On compare chaque magasin à la moyenne de son propre mois</li>
+        <li>On garde les magasins sous la moitié de la moyenne mensuelle</li>
+      </ul>
+      <span class="arrow">Voir la requête expliquée →</span>
+    </a>
+    <a class="card sql" href="./sql-04-normalisation-textuelle-regexp.html">
+      <div class="name">Corriger les produits mal renseignés dans le catalogue</div>
+      <div class="file">sql-04-normalisation-textuelle-regexp.sql</div>
+      <div class="desc">Certains produits sont mal catégorisés dans le catalogue à cause d'erreurs de saisie. Cette requête les reclasse automatiquement à partir de leur référence.</div>
+      <ul class="steps">
+        <li>On croise les ventes avec le catalogue produit</li>
+        <li>On regarde si la référence produit contient un mot-clé (box/pack/kit)</li>
+        <li>Si oui, on classe le produit en "Bundled Kit"</li>
+        <li>Sinon, on garde la catégorie du catalogue, ou "Standard Refill" par défaut</li>
+      </ul>
+      <span class="arrow">Voir la requête expliquée →</span>
+    </a>
+    <a class="card sql" href="./sql-05-pipeline-etl-consolidation.html">
+      <div class="name">Assembler les ventes avec les infos magasins et produits</div>
+      <div class="file">sql-05-pipeline-etl-consolidation.sql</div>
+      <div class="desc">Rassemble les ventes brutes avec 3 autres sources (logistique, enseignes, catalogue produit) pour obtenir une table complète et prête à l'emploi.</div>
+      <ul class="steps">
+        <li>On part des ventes brutes</li>
+        <li>On y ajoute les infos logistiques du magasin, sa position dans l'enseigne, puis la catégorie du produit</li>
+        <li>On uniformise le format des identifiants pour sécuriser les jointures</li>
+        <li>On retire les lignes marquées à supprimer</li>
+      </ul>
+      <span class="arrow">Voir la requête expliquée →</span>
+    </a>
+    <a class="card sql" href="./sql-06-valorisation-financiere-factures-avoirs.html">
+      <div class="name">Calculer le vrai chiffre d'affaires (factures moins avoirs)</div>
+      <div class="file">sql-06-valorisation-financiere-factures-avoirs.sql</div>
+      <div class="desc">Certaines factures sont annulées ou remboursées (avoirs). Cette requête calcule un CA net fiable en soustrayant les avoirs des factures.</div>
+      <ul class="steps">
+        <li>On filtre les commandes valides du périmètre B2B retail</li>
+        <li>On récupère les lignes de facture, puis les factures liées</li>
+        <li>On additionne si c'est une facture, on soustrait si c'est un avoir</li>
+        <li>On calcule le total par date, magasin et facture</li>
+      </ul>
+      <span class="arrow">Voir la requête expliquée →</span>
+    </a>
+  </div>
+
+  <h2>À propos des données</h2>
+  <div class="about">
+    <p>Tous les chiffres (CA, volumes, taux, montants, dates précises) sont générés artificiellement. Les noms d'agents commerciaux, d'agences partenaires et de magasins individuels sont fictifs.</p>
+    <p>Dashboards originaux construits sous <a href="https://www.metabase.com/" style="color:var(--brand);">Metabase</a>. Les reconstructions de ce portfolio utilisent <a href="https://www.chartjs.org/" style="color:var(--brand);">Chart.js</a>.</p>
+  </div>
+</div>
+</body>
+</html>
