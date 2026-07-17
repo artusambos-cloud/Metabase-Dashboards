@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>900.care · Assembler les ventes avec les infos magasins et produits (SQL)</title>
+<title>Assembler les ventes avec les infos magasins et produits (SQL)</title>
 <style>
   :root{ --bg:#F9FBFC; --card:#FFFFFF; --border:#E3E8EE; --text:#4C5773; --title:#2E3A59; --brand:#509EE3; }
   *{box-sizing:border-box;}
@@ -59,7 +59,7 @@
   <div class="sql-card">
     <h3>Requête SQL <a href="./sql-05-pipeline-etl-consolidation.sql">Voir le fichier .sql brut →</a></h3>
     <pre><code>-- ============================================================================
--- 900.care · Pipeline ETL de consolidation omni-source (jointures multiples & casts)
+-- Pipeline ETL de consolidation omni-source (jointures multiples & casts)
 -- ============================================================================
 -- Unifie un flux hétérogène de sell-out avec des référentiels tiers (données
 -- logistiques GLN, structures d'enseignes, catalogue produit), avec des
@@ -93,7 +93,7 @@ LEFT JOIN `production_crm.dim_products` AS catalog
 WHERE COALESCE(sell_out.x_to_delete, FALSE) = FALSE;</code></pre>
   </div>
 
-  <div class="footer-note">Données et schémas fictifs — 900.care, exemple de modélisation de données retail.</div>
+  <div class="footer-note">Données et schémas fictifs — exemple de modélisation de données retail.</div>
 </div>
 </body>
 </html>

@@ -1,4 +1,3 @@
-
 # Metabase-Dashboards
 
 ## 👉 [Voir le portfolio complet en ligne →](https://artusambos-cloud.github.io/Metabase-Dashboards/)
@@ -7,13 +6,11 @@ Page d'accueil avec tous les dashboards, le modèle de données et les requêtes
 
 ---
 
-🎯 Enjeu : Piloter la force de vente et fiabiliser le calcul des commissions des agents terrain. 
+🎯 Enjeu : Piloter la force de vente et fiabiliser le calcul des commissions des agents terrain. 🛠️ Solution : Dashboard dynamique intégrant les règles d'incentives et les différents angles business en retail. 📊 Usage : +15 filtres interactifs pour une analyse sur-mesure par le Directeur Commercial.
 
-🛠️ Solution : Dashboard dynamique intégrant les règles d'incentives et les différents angles business en retail. 
+Ce repo présente une sélection de dashboards Metabase construits pour le suivi retail d'une entreprise du secteur (ventes, commandes, visites terrain, commissions agences, rétention client). Il s'agit de **reconstructions visuelles** des vrais dashboards : mêmes types de graphiques, même structure, mais avec des données entièrement fictives — pensées pour être partagées publiquement sans exposer de chiffres d'affaires, de partenaires ou de collaborateurs réels.
 
-📊 Usage : +15 filtres interactifs pour une analyse sur-mesure par le Directeur Commercial.
-
-Ce repo présente une sélection de dashboards Metabase construits pour le suivi retail de **900.care** (ventes, commandes, visites terrain, commissions agences, rétention client). Il s'agit de **reconstructions visuelles** des vrais dashboards : mêmes types de graphiques, même structure, mais avec des données entièrement fictives — pensées pour être partagées publiquement sans exposer de chiffres d'affaires, de partenaires ou de collaborateurs réels.
+Le détail de la méthode d'anonymisation (ce qui a été gardé, ce qui a été inventé, et pourquoi) est documenté dans [`PLAN_ANONYMISATION.md`](./PLAN_ANONYMISATION.md).
 
 ## Comment consulter les dashboards
 
@@ -81,9 +78,8 @@ Calcule un CA net fiable en réconciliant factures et avoirs à la ligne.
 
 ## À propos des données
 
-Tous les chiffres (CA, volumes, taux, montants, dates précises) sont générés artificiellement. Les noms d'agents commerciaux, d'agences partenaires et de magasins individuels sont fictifs. 
+Tous les chiffres (CA, volumes, taux, montants, dates précises) sont générés artificiellement. Les noms d'agents commerciaux, d'agences partenaires et de magasins individuels sont fictifs. Les enseignes de la grande distribution française (E.Leclerc, Carrefour, Intermarché, Coopérative U, Casino, Auchan) sont conservées telles quelles car ce sont des informations publiques ; seule la répartition précise du CA par enseigne a été inventée. Voir [`PLAN_ANONYMISATION.md`](./PLAN_ANONYMISATION.md) pour le détail complet, catégorie par catégorie.
 
 ## Stack
 
 Dashboards originaux construits sous [Metabase](https://www.metabase.com/). Les reconstructions de ce repo utilisent [Chart.js](https://www.chartjs.org/) et reprennent la palette de couleurs par défaut de Metabase.
-

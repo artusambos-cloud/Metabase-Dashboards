@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>900.care · Calculer le vrai chiffre d'affaires - factures moins avoirs (SQL)</title>
+<title>Calculer le vrai chiffre d'affaires - factures moins avoirs (SQL)</title>
 <style>
   :root{ --bg:#F9FBFC; --card:#FFFFFF; --border:#E3E8EE; --text:#4C5773; --title:#2E3A59; --brand:#509EE3; }
   *{box-sizing:border-box;}
@@ -59,7 +59,7 @@
   <div class="sql-card">
     <h3>Requête SQL <a href="./sql-06-valorisation-financiere-factures-avoirs.sql">Voir le fichier .sql brut →</a></h3>
     <pre><code>-- ============================================================================
--- 900.care · Pipeline de valorisation financière nettoyée (balance factures vs avoirs)
+-- Pipeline de valorisation financière nettoyée (balance factures vs avoirs)
 -- ============================================================================
 -- Modélise une balance comptable analytique en réajustant au centime près le
 -- chiffre d'affaires brut face aux flux d'avoirs et de retours marchandises,
@@ -103,7 +103,7 @@ GROUP BY 1, 2, 3
 ORDER BY transaction_date DESC, net_revenue_ht DESC;</code></pre>
   </div>
 
-  <div class="footer-note">Données et schémas fictifs — 900.care, exemple de modélisation de données retail.</div>
+  <div class="footer-note">Données et schémas fictifs — exemple de modélisation de données retail.</div>
 </div>
 </body>
 </html>

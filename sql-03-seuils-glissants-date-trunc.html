@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>900.care · Suivre les magasins qui décrochent mois après mois (SQL)</title>
+<title>Suivre les magasins qui décrochent mois après mois (SQL)</title>
 <style>
   :root{ --bg:#F9FBFC; --card:#FFFFFF; --border:#E3E8EE; --text:#4C5773; --title:#2E3A59; --brand:#509EE3; }
   *{box-sizing:border-box;}
@@ -59,7 +59,7 @@
   <div class="sql-card">
     <h3>Requête SQL <a href="./sql-03-seuils-glissants-date-trunc.sql">Voir le fichier .sql brut →</a></h3>
     <pre><code>-- ============================================================================
--- 900.care · Modélisation temporelle mobile et seuils glissants (DATE_TRUNC)
+-- Modélisation temporelle mobile et seuils glissants (DATE_TRUNC)
 -- ============================================================================
 -- Suivi des ruptures de tendances en retail : découpe les volumes de vente
 -- par mois et chaîne les CTE pour évaluer la dérive des ventes de chaque
@@ -103,7 +103,7 @@ WHERE store_volume.total_quantity_sold < (market_volume.market_avg_quantity / 2)
 ORDER BY store_volume.fiscal_month DESC, store_volume.total_quantity_sold ASC;</code></pre>
   </div>
 
-  <div class="footer-note">Données et schémas fictifs — 900.care, exemple de modélisation de données retail.</div>
+  <div class="footer-note">Données et schémas fictifs — exemple de modélisation de données retail.</div>
 </div>
 </body>
 </html>

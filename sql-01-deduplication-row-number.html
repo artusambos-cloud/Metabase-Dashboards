@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>900.care · Garder seulement la dernière visite de chaque magasin (SQL)</title>
+<title>Garder seulement la dernière visite de chaque magasin (SQL)</title>
 <style>
   :root{ --bg:#F9FBFC; --card:#FFFFFF; --border:#E3E8EE; --text:#4C5773; --title:#2E3A59; --brand:#509EE3; }
   *{box-sizing:border-box;}
@@ -59,7 +59,7 @@
   <div class="sql-card">
     <h3>Requête SQL <a href="./sql-01-deduplication-row-number.sql">Voir le fichier .sql brut →</a></h3>
     <pre><code>-- ============================================================================
--- 900.care · Déduplication temporelle et extraction d'états courants
+-- Déduplication temporelle et extraction d'états courants
 -- ============================================================================
 -- Audite un flux de rapports terrain et élimine les doublons historiques pour
 -- isoler, sans sous-requête lourde, le statut courant et unique de chaque
@@ -95,7 +95,7 @@ WHERE row_num = 1
 ORDER BY report_date DESC;</code></pre>
   </div>
 
-  <div class="footer-note">Données et schémas fictifs — 900.care, exemple de modélisation de données retail.</div>
+  <div class="footer-note">Données et schémas fictifs — exemple de modélisation de données retail.</div>
 </div>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>900.care · Repérer les magasins qui vendent anormalement peu (SQL)</title>
+<title>Repérer les magasins qui vendent anormalement peu (SQL)</title>
 <style>
   :root{ --bg:#F9FBFC; --card:#FFFFFF; --border:#E3E8EE; --text:#4C5773; --title:#2E3A59; --brand:#509EE3; }
   *{box-sizing:border-box;}
@@ -59,7 +59,7 @@
   <div class="sql-card">
     <h3>Requête SQL <a href="./sql-02-detection-anomalies-cross-join.sql">Voir le fichier .sql brut →</a></h3>
     <pre><code>-- ============================================================================
--- 900.care · Détection d'anomalies structurelles (CROSS JOIN)
+-- Détection d'anomalies structurelles (CROSS JOIN)
 -- ============================================================================
 -- Cartographie la santé financière d'un réseau de distribution en confrontant
 -- instantanément la performance historique de chaque magasin à une constante
@@ -98,7 +98,7 @@ WHERE store.avg_revenue_store < (market.global_avg_revenue / 2)
 ORDER BY store.avg_revenue_store ASC;</code></pre>
   </div>
 
-  <div class="footer-note">Données et schémas fictifs — 900.care, exemple de modélisation de données retail.</div>
+  <div class="footer-note">Données et schémas fictifs — exemple de modélisation de données retail.</div>
 </div>
 </body>
 </html>

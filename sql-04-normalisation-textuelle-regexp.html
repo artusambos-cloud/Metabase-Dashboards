@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>900.care · Corriger les produits mal renseignés dans le catalogue (SQL)</title>
+<title>Corriger les produits mal renseignés dans le catalogue (SQL)</title>
 <style>
   :root{ --bg:#F9FBFC; --card:#FFFFFF; --border:#E3E8EE; --text:#4C5773; --title:#2E3A59; --brand:#509EE3; }
   *{box-sizing:border-box;}
@@ -59,7 +59,7 @@
   <div class="sql-card">
     <h3>Requête SQL <a href="./sql-04-normalisation-textuelle-regexp.sql">Voir le fichier .sql brut →</a></h3>
     <pre><code>-- ============================================================================
--- 900.care · Moteur de normalisation textuelle et classification (REGEXP)
+-- Moteur de normalisation textuelle et classification (REGEXP)
 -- ============================================================================
 -- Corrige la mauvaise qualité de données d'un catalogue produit (Master Data)
 -- en utilisant des expressions régulières pour identifier et reclassifier à
@@ -85,7 +85,7 @@ LEFT JOIN `production_crm.dim_products` AS product
 WHERE COALESCE(sales.is_test_row, FALSE) = FALSE;</code></pre>
   </div>
 
-  <div class="footer-note">Données et schémas fictifs — 900.care, exemple de modélisation de données retail.</div>
+  <div class="footer-note">Données et schémas fictifs — exemple de modélisation de données retail.</div>
 </div>
 </body>
 </html>
